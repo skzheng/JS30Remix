@@ -12,7 +12,7 @@ body,html {
 .keys {
   display: flex;
   flex: 1;
-  min-height: 100vh;
+  min-height: 70vh;
   align-items: center;
   justify-content: center;
 }
@@ -75,4 +75,13 @@ kbd {
   color: #ffffff;
   font-size: 2rem;
   text-shadow: 0 0 2rem black;
+}
+
+.questions{
+  margin-top: 10vh;
+  text-align: center;
+  font-size: 5rem;
+  color: #ffc600;
+  text-shadow: 0 0 1rem black;
+  /* stroke: 5px solid black; */
 }

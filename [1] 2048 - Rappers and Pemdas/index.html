@@ -12,7 +12,10 @@
     Q: What is this?
     A: 2048 : PEMDAS AND RAPPERS! 
   </p>
-
+  <div class="questions">
+    <button onclick="randomQuestion()" >Start</button>
+  </div>
+  </div>
   <div class="keys">
     <div class="key">
       <p class="numbers">2</p>
@@ -42,6 +45,53 @@
   <audio data-key="40" src="sounds/1738.mp3"></audio>
 
 <script>
+  let score = 0; 
+  let questions = {
+    2: [
+      "1 + 1"
+      ],
+    3: [
+      "( 2 + 2 ) - 1"
+    ],
+    305: [
+      "60 *  5 + 5"
+      ],
+    1738: [
+      "3500 / 2 - 12"
+      ]
+  }
+
+  // Display a new question
+  function randomQuestion(){
+    let keys = Object.keys(questions);
+    let question = shuffle(questions[shuffle(keys)]);
+    let questionBox = document.querySelector('.questions');
+    questionBox.innerHTML = (question);
+  }
+
+  // Randomly pick a question from questions array
+  function shuffle(arr){
+    for(let i = 0 ; i < arr.length ; i++){
+      let temp = arr[i];
+      let random = Math.floor(Math.random() * arr.length);
+      arr[i] = arr[random];
+      arr[random] = temp;
+    }
+    return arr[0];
+  }
+
+  function evalAnswer(){
+    let equation = document.querySelector('.questions').innerHTML;
+    if(typeof equation === "string"){
+    console.log(eval((equation)));
+    }
+    // console.log(typeof equation);
+  }
+
+  function learnMore(){
+
+  }
+
   // Stop arrow keys from moving the screen
   document.body.onkeydown = function killKeys(e){
     if(e.keyCode >= 37 && e.keyCode <= 40){
@@ -62,8 +112,9 @@
     if(!audio) return;
 
     key.classList.add('playing');
-    console.log(key.classList);
     audio.currentTime = 0;
+    evalAnswer()
+    randomQuestion();
     audio.play();
   }
 
