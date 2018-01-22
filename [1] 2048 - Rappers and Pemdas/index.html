@@ -10,8 +10,11 @@
   <h1 id="headers">2048</h1>
   <p id="description">RAPPERS & PEMDAS</p>
   <p class="learnMore" onclick="learnMore()">?</p>
-  <div class="score">
-    0
+  <div class="scoreHeader">
+    <h2>SCORE:</h2>
+    <div class="score">
+      0
+    </div>
   </div>
   <div id="progress">
     <div id="progress-bar"></div>
@@ -24,21 +27,25 @@
       <p class="numbers">2</p>
       <img src="images/2chainz.png" data-key="37" class="picture"/>
       <span class="sound">2Chainz!</span>
+      <img src="images/arrow.png" class="arrow" id="leftArrow">
     </div>
     <div class="key">
       <p class="numbers">3</p>
       <img src="images/shaq.png"  data-key="38" class="picture"/>
       <span class="sound">Big Man Shaq!</span>
+      <img src="images/arrow.png" class="arrow" id="upArrow">
     </div>
     <div class="key">
       <p class="numbers">305</p>
       <img src="images/pitbull.png" data-key="39" class="picture"/>
       <span class="sound">Pitbull!</span>
+      <img src="images/arrow.png" class="arrow" id="rightArrow">
     </div>
     <div class="key">
       <p class="numbers">1738</p>
       <img src="images/fetty2.png"  data-key="40" class="picture"/>
       <span class="sound">Fetty Wap!</span>
+      <img src="images/arrow.png" data-key="40" class="arrow" id="downArrow">
     </div>
   </div>
   </div>
@@ -110,12 +117,18 @@
   function timer(){
     let bar  = document.querySelector('#progress-bar');
     let width = 100;
-    let increment = setInterval(decrease, 30);
+    if( increment ){console.log(increment)}
+    let increment = setInterval(decrease, 10);
     function decrease(){
       if(width <= 0){
-        
+        clearInterval(increment);
+        bar.style.width = 100 + '%';
+      } else {
+        bar.style.width = width + '%';
+        width--;
       }
     }
+    // decrease();
   }
 
   // Learn more modal
@@ -127,14 +140,28 @@
     modal.classList.add('modal');
     modal.innerHTML = 'HELLO';
     
+    let description = document.createElement('p');
+    description.innerHTML = 'What is this?'
 
     let exit = document.createElement('button');
+    exit.innerHTML = "X";
     exit.classList.add('modalExit');
     exit.addEventListener('click', () => {
       app.style.filter = "opacity(1)";
       body.removeChild(modal);
+      
     })
+
+    let learnMore = document.querySelector('.learnMore');
+    window.addEventListener('click', closeModal, true);
+    function closeModal(e){
+      if(e.target !== modal && e.target !== learnMore){
+        exit.click();
+      }
+      window.removeEventListener('click', closeModal, true);
+    }
     modal.appendChild(exit);
+    modal.appendChild(description);
     body.appendChild(modal);
   }
 
@@ -164,6 +191,7 @@
     audio.currentTime = 0;
     if (evalAnswer(keyValue)) calcScore();
     randomQuestion();
+    timer();   
     audio.play();
   }
 
