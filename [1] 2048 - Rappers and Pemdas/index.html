@@ -9,7 +9,12 @@
   <div class="app">
   <h1 id="headers">2048</h1>
   <p id="description">RAPPERS & PEMDAS</p>
-  <p class="learnMore" onclick="learnMore()">?</p>
+  <div class="learnMore" onclick="learnMore()">
+    <img src="images/help.png" />
+  </div>
+  <div id="pauseButton" onclick="pause()" data-pause="false">
+    <img src="images/pauseButton.png"/>
+  </div>
   <div class="scoreHeader">
     <h2>SCORE:</h2>
     <div class="score">
@@ -100,7 +105,10 @@
     let keys = Object.keys(questions);
     let question = shuffle(questions[shuffle(keys)]);
     let questionBox = document.querySelector('.questions');
+    let started = document.getElementById('startButton');
+    if(started) timer();
     questionBox.innerHTML = (question);
+    resetBar();
   }
 
   // Randomly pick a question from questions array
@@ -125,35 +133,49 @@
   }
 
   // Increment score 
-  function calcScore(){
+  function calcScore(bool){
     let scoreCounter = document.querySelector('.score');
-    score = score + 10;
-    console.log(score)
+    score = bool ? score + 10 : score - 10;
     scoreCounter.innerHTML = score; 
+  }
+  
+  function pause(){
+    let pauseButton = document.getElementById("pauseButton");
+    let status = pauseButton.getAttribute("data-pause") === "true";
+    pauseButton.setAttribute("data-pause", !status); 
+    for (var i = 1; i < 99999; i++) {
+      window.clearInterval(i);
+    }
+
+    let questionBox = document.querySelector('.questions');
+    if(!status) {
+      pauseButton.children[0].src = "images/playButton.png"
+      questionBox.innerHTML = "PAUSED";
+    } else {
+      pauseButton.children[0].src = "images/pauseButton.png"
+      timer();
+      randomQuestion();
+    }
+    resetBar();
   }
 
   // Timer 
   function timer(){
     let bar  = document.querySelector('#progress-bar');
-    let width = 100;
-    let increment = setInterval(decrease, 30);
-    // clearInterval(increment); 
+    let increment = setInterval(decrease, 60);
+    resetBar();
     function decrease(){
+    let width = parseInt(bar.style.width);
       if(width <= 0){
-        clearInterval(increment);
-        resetBar();
-      } else {
-        width--;
-        bar.style.width = width + '%';
-      }
+        // clearInterval(increment);
+        randomQuestion();
+      } 
+      width--;
+      bar.style.width = width + '%';
     }
   }
 
   function resetBar(){
-    for(i=0; i<10000; i++)
-    {
-        window.clearInterval(i);
-    }
     let bar  = document.querySelector('#progress-bar');
     bar.style.width = '100%';
   }
@@ -212,9 +234,9 @@
     if(!audio) return;
     key.classList.add('playing');
     audio.currentTime = 0;
-    if (evalAnswer(keyValue)) calcScore();
+    if (evalAnswer(keyValue)) calcScore(true)
+    else calcScore(false);
     randomQuestion();
-    timer();  
     audio.play();
   }
 
