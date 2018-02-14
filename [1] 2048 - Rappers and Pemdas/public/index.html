@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <title>2048 | R & P</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
   <div class="app">
   <h1 id="headers">2048</h1>
   <p id="description">[ RAPPERS & PEMDAS ]</p>
   <div class="learnMore" onclick="learnMore()">
-    <img src="images/help.png" />
+    <img src="./images/help.png" />
   </div>
   <div id="pauseButton" onclick="pause(); clip('wait')" data-pause="false">
-    <img src="images/pauseButton.png"/>
+    <img src="./images/pauseButton.png"/>
   </div>
   <div class="scoreHeader">
     <h2>SCORE:</h2>
@@ -30,62 +30,62 @@
   <div class="keys">
     <div class="key">
       <p class="numbers">2</p>
-      <img src="images/2chainz.png" onclick="playSound('',37)" data-key="37" class="picture"/>
+      <img src="./images/2chainz.png" onclick="playSound('',37)" data-key="37" class="picture"/>
       <span class="sound">2Chainz!</span>
-      <img src="images/arrow.png" class="arrow" id="leftArrow">
+      <img src="./images/arrow.png" class="arrow" id="leftArrow">
     </div>
     <div class="key">
       <p class="numbers">3</p>
-      <img src="images/shaq.png" onclick="playSound('', 38)" data-key="38" class="picture"/>
+      <img src="./images/shaq.png" onclick="playSound('', 38)" data-key="38" class="picture"/>
       <span class="sound">Big Man Shaq!</span>
-      <img src="images/arrow.png" class="arrow" id="upArrow">
+      <img src="./images/arrow.png" class="arrow" id="upArrow">
     </div>
     <div class="key">
       <p class="numbers">305</p>
-      <img src="images/pitbull.png" onclick="playSound('',39)" data-key="39" class="picture"/>
+      <img src="./images/pitbull.png" onclick="playSound('',39)" data-key="39" class="picture"/>
       <span class="sound">Pitbull!</span>
-      <img src="images/arrow.png" class="arrow" id="rightArrow">
+      <img src="./images/arrow.png" class="arrow" id="rightArrow">
     </div>
     <div class="key">
       <p class="numbers">1738</p>
-      <img src="images/fetty2.png" onclick="playSound('',40)" data-key="40" class="picture"/>
+      <img src="./images/fetty2.png" onclick="playSound('',40)" data-key="40" class="picture"/>
       <span class="sound">Fetty Wap!</span>
-      <img src="images/arrow.png" data-key="40" class="arrow" id="downArrow">
+      <img src="./images/arrow.png" data-key="40" class="arrow" id="downArrow">
     </div>
   </div>
   </div>
 
   <div id="modal">
-    <p>FAQ</p>
+    <p><strong>FAQ</strong></p>
     <div id="modalExit" onclick="modalExit()">X</div>
-    <p>Q: What is this?</p>
+    <p><strong>Q: What is this?</strong> </p>
     <p>A: A game to practice the orders of operations with the help of some rappers</p>
-    <p>Q: How do I play?</p>
+    <p><strong>Q: How do I play?</strong></p>
     <p>A: Every problem prompt will have a solution ending with one of the four numbers 
       below, players pick a number with the arrow keys or by clicking on a rapper face.
     </p>
-    <p>Q: Why these specific numbers?</p>
+    <p><strong>Q: Why these specific numbers?</strong></p>
     <p>A: Each number is near and dear to the respective rapper's heart</p>
-    <p>Q: Why 2048?</p>
+    <p><strong>Q: Why 2048?</strong></p>
     <p>A: 2 + 3 + 305 + 1738 = 2048</p>
-    <p>Q: Can I play this on mobile?</p>
+    <p><strong>Q: Can I play this on mobile?</strong></p>
     <p>A: Nah... mobile app maybe in the works.</p>
   </div>
 
-  <audio data-key="37" src="sounds/2.mp3"></audio>
-  <audio data-key="38" src="sounds/3.mp3"></audio>
-  <audio data-key="39" src="sounds/305.mp3"></audio>
-  <audio data-key="40" src="sounds/1738.mp3"></audio>
-  <audio id="wait" src="sounds/skrr.mp3"></audio>
-  <audio id="what" src="sounds/what.mp3"></audio>
-  <audio id="start" src="sounds/start.mp3"></audio>
+  <audio data-key="37" src="./sounds/2.mp3"></audio>
+  <audio data-key="38" src="./sounds/3.mp3"></audio>
+  <audio data-key="39" src="./sounds/305.mp3"></audio>
+  <audio data-key="40" src="./sounds/1738.mp3"></audio>
+  <audio id="wait" src="./sounds/skrr.mp3"></audio>
+  <audio id="what" src="./sounds/what.mp3"></audio>
+  <audio id="start" src="./sounds/start.mp3"></audio>
   
 <script>
   let score = 0; 
   let questions = {
     2: [
       "1 + 1", 
-      "3 + 1 * 2 - 1",
+      "(3 + 1) * (2 / 4)",
       "4 / 2 - 2 + 2",
       "( 35 + 1 ) / 2 - 17 + 1"
       ],
@@ -162,11 +162,11 @@
     if(!status) {
       app.style.filter = 'opacity(0.5)';
       pauseButton.children[0].style.filter = 'opacity(1.0)';
-      pauseButton.children[0].src = "images/playButton.png"
+      pauseButton.children[0].src = "./images/playButton.png"
       questionBox.innerHTML = "PAUSED";
     } else {
       app.style.filter = 'opacity(1)';
-      pauseButton.children[0].src = "images/pauseButton.png"
+      pauseButton.children[0].src = "./images/pauseButton.png"
       timer();
       randomQuestion();
     }
