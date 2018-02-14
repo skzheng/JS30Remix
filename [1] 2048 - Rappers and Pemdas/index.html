@@ -8,11 +8,11 @@
 <body>
   <div class="app">
   <h1 id="headers">2048</h1>
-  <p id="description">RAPPERS & PEMDAS</p>
+  <p id="description">[ RAPPERS & PEMDAS ]</p>
   <div class="learnMore" onclick="learnMore()">
     <img src="images/help.png" />
   </div>
-  <div id="pauseButton" onclick="pause()" data-pause="false">
+  <div id="pauseButton" onclick="pause(); clip('wait')" data-pause="false">
     <img src="images/pauseButton.png"/>
   </div>
   <div class="scoreHeader">
@@ -25,7 +25,7 @@
     <div id="progress-bar"></div>
   </div>
   <div class="questions">
-    <button id="startButton" onclick="randomQuestion()" >Start</button>
+    <button id="startButton" onclick="randomQuestion(); clip('start')" >Start</button>
   </div> 
   <div class="keys">
     <div class="key">
@@ -76,7 +76,10 @@
   <audio data-key="38" src="sounds/3.mp3"></audio>
   <audio data-key="39" src="sounds/305.mp3"></audio>
   <audio data-key="40" src="sounds/1738.mp3"></audio>
-
+  <audio id="wait" src="sounds/skrr.mp3"></audio>
+  <audio id="what" src="sounds/what.mp3"></audio>
+  <audio id="start" src="sounds/start.mp3"></audio>
+  
 <script>
   let score = 0; 
   let questions = {
@@ -139,7 +142,15 @@
     scoreCounter.innerHTML = score; 
   }
   
+  // Misc. sound effects
+  function clip(sound){
+    let clip = document.getElementById(`${sound}`);
+    clip.play();
+  }
+
+  // Pause game and freeze screen
   function pause(){
+    let app = document.querySelector('.app');
     let pauseButton = document.getElementById("pauseButton");
     let status = pauseButton.getAttribute("data-pause") === "true";
     pauseButton.setAttribute("data-pause", !status); 
@@ -149,9 +160,12 @@
 
     let questionBox = document.querySelector('.questions');
     if(!status) {
+      app.style.filter = 'opacity(0.5)';
+      pauseButton.children[0].style.filter = 'opacity(1.0)';
       pauseButton.children[0].src = "images/playButton.png"
       questionBox.innerHTML = "PAUSED";
     } else {
+      app.style.filter = 'opacity(1)';
       pauseButton.children[0].src = "images/pauseButton.png"
       timer();
       randomQuestion();
@@ -168,6 +182,7 @@
     let width = parseInt(bar.style.width);
       if(width <= 0){
         // clearInterval(increment);
+        calcScore(false);
         randomQuestion();
       } 
       width--;
@@ -175,6 +190,7 @@
     }
   }
 
+  // Progress bar reset
   function resetBar(){
     let bar  = document.querySelector('#progress-bar');
     bar.style.width = '100%';
@@ -185,8 +201,12 @@
     let body = document.querySelector('body');
     let app = document.querySelector('.app');
     let exit = document.getElementById('modalExit')
-
-    app.style.filter = "opacity(0.5)";
+    let what = document.getElementById('what');
+    what.play();
+    let pauseButton = document.getElementById("pauseButton");
+    pauseButton.setAttribute("data-pause", "false"); 
+    pause();
+    
     let modal = document.getElementById('modal');
     modal.style.visibility = 'visible';
 

@@ -2,26 +2,24 @@
   font-size: 10px !important;
   background: url(images/2048BG.jpg) center;
   background-size: cover;
-
+  height: 100%;
 }
 
 body,html {
+  height: 100%;
   margin: 0;
   padding: 0;
-  height: 100vh;
   font-family: sans-serif;
 }
 
 .keys {
   display: flex;
   flex: 1;
-  min-height: 55vh;
   align-items: center;
   justify-content: center;
 }
 
 .key {
-  /* border: .4rem solid black; */
   border-radius: .5rem;
   margin: 1rem;
   font-size: 1.5rem;
@@ -29,11 +27,9 @@ body,html {
   transition: all .07s ease;
   text-align: center;
   color: white;
-  /* background: rgba(0,0,0,0.4); */
   text-shadow: 0 0 .5rem black;
   display:flex;
   flex-direction: column;
-  height: 20rem;
 }
 
 .playing {
@@ -55,6 +51,12 @@ body,html {
   height: 150px;
   width: auto;
   transition: all .07s ease;
+  border-radius: 50%;
+}
+
+.picture:hover {
+  transform: scale(1.2);
+  animation: pulse 1s infinite;
 }
 
 .numbers{
@@ -65,7 +67,7 @@ body,html {
 #headers {
   text-align: center;
   color: #ffc600;
-  font-size: 4rem;
+  font-size: 5rem;
   text-shadow: 0 0 2rem black;
   margin: 0;
 }
@@ -73,7 +75,7 @@ body,html {
 #description {
   text-align: center;
   color: #ffffff;
-  font-size: 1.5rem !important;
+  font-size: 1.2rem;
   margin: 0;
   text-shadow: 0 0 2rem black;
 }
@@ -105,10 +107,11 @@ body,html {
 }
 
 #progress {
-  margin: auto;
+  margin: 20px auto;
   width: 60%;
   background-color: white; 
   border-radius: 50px;
+  
 }
 
 #progress-bar {
@@ -124,12 +127,16 @@ body,html {
   background: rgb(116, 237, 98);
   color: white;
   font-size: 20px;
-  border-radius: 50px;
-  border: 2px white solid;
+  border-radius: 15px;
+  outline: none;
+  border-bottom: 5px rgb(48, 123, 41) solid;
 }
 
-#startButton:focus, #startButton:active {
-  outline: none;
+#startButton:focus, #startButton:active, #startButton:hover {
+  background: rgb(38, 255, 0);
+  color: black;
+  height: 52px;
+  border-bottom: 3px rgb(48, 123, 41) solid;
 }
 
 .scoreHeader {
@@ -149,6 +156,7 @@ body,html {
   margin: 1rem;
   margin-left: 0.5rem;
   position: absolute;
+  border-radius: 50%;
 }
 
 #modal {
@@ -180,4 +188,27 @@ body,html {
   margin: 1rem;
   margin-left: 4rem;
   height: 3rem;
+  border-radius: 50%;
+}
+
+.learnMore > img:hover {
+  transform: scale(1.2);
+  animation: pulse 1s infinite;
+}
+
+#pauseButton > img:hover {
+  transform: scale(1.2);
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 #ffc4007b;
+  }
+  70% {
+      box-shadow: 0 0 0 14px #ffc40000;
+  }
+  100% {
+      box-shadow: 0 0 0 0 #ffc40000;
+  }
 }
