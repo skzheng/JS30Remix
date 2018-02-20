@@ -7,14 +7,15 @@
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-  <h1 id="title"> Word Clock</h1>
+  <h1 id="title"></h1>
+  <div id="ampm"><img id="pic" src="./images/sun.png" /></div>
   <div id="clock">
     <div id="words">
       <div class="row">
 
-        <span class="word">IT</span>
+        <span class="word lit">IT</span>
         <span class="word">L</span>
-        <span class="word">IS</span>
+        <span class="word lit">IS</span>
         <span class="word">A</span>
         <span class="word">S</span>
         <span class="word">TIME</span>
@@ -23,89 +24,108 @@
 
       <div class="row">
           
-        <span class="word">AC</span>
-        <span class="word">QUARTER</span>
+        <span class="word" data-word="A">A</span>
+        <span class="word">C</span>
+        <span class="word" data-word="QUARTER">QUARTER</span>
         <span class="word">DC</span>
 
       </div>
 
       <div class="row">
           
-        <span class="word">TWENTY</span>
-        <span class="word">FIVE</span>
+        <span class="word" data-word="TWENTY">TWENTY</span>
+        <span class="word" data-word="FIVE">FIVE</span>
         <span class="word">X</span>
 
       </div>
 
       <div class="row">
           
-        <span class="word">HALF</span>
+        <span class="word" data-word="HALF">HALF</span>
         <span class="word">B</span>
-        <span class="word">TENFTO</span>
+        <span class="word" data-word="TEN">TEN</span>
+        <span class="word" >F</span>
+        <span class="word" data-word="TO">TO</span>
 
       </div>
 
       <div class="row">
           
-        <span class="word">PAST</span>
+        <span class="word" data-word="PAST">PAST</span>
         <span class="word">ERU</span>
-        <span class="word">NINE</span>
+        <span class="word" data-word="NINE">NINE</span>
 
       </div>
 
       <div class="row">
           
-        <span class="word">ONE</span>
-        <span class="word">SIX</span>
-        <span class="word">THREE</span>
+        <span class="word" data-word="ONE">ONE</span>
+        <span class="word" data-word="SIX">SIX</span>
+        <span class="word" data-word="THREE">THREE</span>
 
       </div>
 
       <div class="row">
           
-        <span class="word">FOUR</span>
-        <span class="word">FIVE</span>
-        <span class="word">TWO</span>
+        <span class="word" data-word="FOUR">FOUR</span>
+        <span class="word" data-word="FIVE">FIVE</span>
+        <span class="word" data-word="TWO">TWO</span>
 
       </div>
 
       <div class="row">
           
-        <span class="word">EIGHT</span>
-        <span class="word"> ELEVEN</span>
+        <span class="word" data-word="EIGHT">EIGHT</span>
+        <span class="word" data-word="ELEVEN"> ELEVEN</span>
 
       </div>
 
       <div class="row">
           
-        <span class="word">SEVEN</span>
-        <span class="word">TWELVE</span>
+        <span class="word" data-word="SEVEN">SEVEN</span>
+        <span class="word" data-word="TWELVE">TWELVE</span>
 
       </div>
 
       <div class="row">
           
-        <span class="word">TEN</span>
-        <span class="word">SEO</span>
-        <span class="word">CLOCK</span>
+        <span class="word" data-word="TEN">TEN</span>
+        <span class="word">SE</span>
+        <span class="word" data-word="OCLOCK">OCLOCK</span>
 
       </div>
     </div>
   </div>
   <script>
-    let numbers = {
-      '1' : 'ONE',
-      '2' : 'TWO',
-      '3' : 'THREE',
-      '4' : 'FOUR',
-      '5' : 'FIVE',
-      '6' : 'SIX',
-      '7' : 'SEVEN',
-      '8' : 'EIGHT',
-      '9' : 'NINE',
-      '10' : 'TEN',
-      '11' : 'ELEVEN',
-      '12' : 'TWELVE'
+    let hourWords = {
+      '0' : ['TWELVE'],
+      '1' : ['ONE'],
+      '2' : ['TWO'],
+      '3' : ['THREE'],
+      '4' : ['FOUR'],
+      '5' : ['FIVE'],
+      '6' : ['SIX'],
+      '7' : ['SEVEN'],
+      '8' : ['EIGHT'],
+      '9' : ['NINE'],
+      '10' : ['TEN'],
+      '11' : ['ELEVEN'],
+      '12' : ['TWELVE']
+    }
+
+    let minWords = {
+      '00' : ['OCLOCK'],
+      '05' : ['FIVE', 'PAST'],
+      '10' : ['TEN', 'PAST'],
+      '15' : ['A', 'QUARTER', 'PAST'],
+      '20' : ['TWENTY', 'PAST'],
+      '25' : ['TWENTY', 'FIVE', 'PAST'],
+      '30' : ['HALF', 'PAST'],
+      '35' : ['TWENTY','FIVE','TO'],
+      '40' : ['TWENTY', 'TO'],
+      '45' : ['A', 'QUARTER' ,'TO'],
+      '50' : ['TEN', 'TO'],
+      '55' : ['FIVE', 'TO']
     }
 
     // Grab current date HHMM
@@ -113,12 +133,35 @@
       let date = new Date();
       let hour = date.getHours();
       let min = date.getMinutes();
+      let amPm = (hour > 12) ? 'PM' : 'AM';
+      let pic = document.getElementById('pic');
+      if(amPm ==='AM'){
+        pic.src = './images/sun.png';
+      } else {
+        pic.src = './images/moon.png';
+      }
+      hour = (hour > 12) ? hour - 12 : hour;
+      minWord = minWords[round(min)];
+      hourWord = (round(min) > 30) ? hourWords[hour+1] : hourWords[hour]
+      lightItUp(hourWord.concat(minWord));
     }
 
-    function formatTime(){
-
+    function round(n){
+      return '' + Math.round(n/5) * 5;
     }
 
-  </script>
+    function lightItUp(arr){
+      for(let i = 0 ; i < arr.length ; i++){
+        let word = document.querySelector(`.word[data-word='${arr[i]}']`)
+        word.classList.add('lit');
+      }
+    }
+    
+    function start(){
+      getDate();
+      let timer = setInterval(getDate,10000);
+    }
+    start();
+    </script>
 </body> 
 </html>
