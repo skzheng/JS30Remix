@@ -2,6 +2,18 @@ body,html {
   font-family: sans-serif;
 }
 
+.word {
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: 1.4rem;
+  word-spacing: 0rem;
+  white-space: nowrap;
+  text-align: justify;
+  color: grey;
+  display: flex;
+  justify-content: space-around;
+}
+
 #title {
   text-align: center;
   margin:auto;
@@ -10,30 +22,28 @@ body,html {
 #clock { 
   height: 50vw;
   width: 50vw;
-  background: rgb(41, 41, 41);
+  background: rgb(0, 0, 0);
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.653);
   margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #words {
-  height: 35vw;
-  width: 35vw;
-  margin: auto;
+  /* height: 35vw;
+  width: 35vw; */
+  padding: 0;
+  margin: 0;
 }
 
-.rivet {
-  background-color: white;
-  border-radius: 50%;
-  height: .2rem;
-  width: .2rem;
+.row {
+  line-height: 1.1rem;
+  margin: 0;
+  padding: 0;
+  margin: 1.4rem;
+  text-align: justify;
+  display: flex; 
+  justify-content: space-around;
 }
-
-.left {
-  float: left;
-}
-
-.right { 
-  float: right;
-}
-
 
