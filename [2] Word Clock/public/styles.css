@@ -1,0 +1,39 @@
+body,html {
+  font-family: sans-serif;
+}
+
+#title {
+  text-align: center;
+  margin:auto;
+}
+
+#clock { 
+  height: 50vw;
+  width: 50vw;
+  background: rgb(41, 41, 41);
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.653);
+  margin: auto;
+}
+
+#words {
+  height: 35vw;
+  width: 35vw;
+  margin: auto;
+}
+
+.rivet {
+  background-color: white;
+  border-radius: 50%;
+  height: .2rem;
+  width: .2rem;
+}
+
+.left {
+  float: left;
+}
+
+.right { 
+  float: right;
+}
+
+
