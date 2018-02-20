@@ -13,9 +13,9 @@
     <div id="words">
       <div class="row">
 
-        <span class="word lit">IT</span>
+        <span class="word it-is">IT</span>
         <span class="word">L</span>
-        <span class="word lit">IS</span>
+        <span class="word it-is">IS</span>
         <span class="word">A</span>
         <span class="word">S</span>
         <span class="word">TIME</span>
@@ -140,6 +140,7 @@
       } else {
         pic.src = './images/moon.png';
       }
+      reset();
       hour = (hour > 12) ? hour - 12 : hour;
       minWord = minWords[round(min)];
       hourWord = (round(min) > 30) ? hourWords[hour+1] : hourWords[hour]
@@ -156,7 +157,15 @@
         word.classList.add('lit');
       }
     }
-    
+
+    function reset(){
+      let lits = document.getElementsByClassName('lit');
+      lits = Array.from(lits);
+      lits.forEach(item => {
+        item.classList.remove('lit');
+      })
+    }
+
     function start(){
       getDate();
       let timer = setInterval(getDate,10000);
