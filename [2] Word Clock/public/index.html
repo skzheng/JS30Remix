@@ -68,7 +68,7 @@
       <div class="row">
           
         <span class="word" data-word="FOUR">FOUR</span>
-        <span class="word" data-word="FIVE">FIVE</span>
+        <span class="word" data-word="FIVE2">FIVE</span>
         <span class="word" data-word="TWO">TWO</span>
 
       </div>
@@ -89,7 +89,7 @@
 
       <div class="row">
           
-        <span class="word" data-word="TEN">TEN</span>
+        <span class="word" data-word="TEN2">TEN</span>
         <span class="word">SE</span>
         <span class="word" data-word="OCLOCK">OCLOCK</span>
 
@@ -103,19 +103,19 @@
       '2' : ['TWO'],
       '3' : ['THREE'],
       '4' : ['FOUR'],
-      '5' : ['FIVE'],
+      '5' : ['FIVE2'],
       '6' : ['SIX'],
       '7' : ['SEVEN'],
       '8' : ['EIGHT'],
       '9' : ['NINE'],
-      '10' : ['TEN'],
+      '10' : ['TEN2'],
       '11' : ['ELEVEN'],
       '12' : ['TWELVE']
     }
 
     let minWords = {
-      '00' : ['OCLOCK'],
-      '05' : ['FIVE', 'PAST'],
+      '0' : ['OCLOCK'],
+      '5' : ['FIVE', 'PAST'],
       '10' : ['TEN', 'PAST'],
       '15' : ['A', 'QUARTER', 'PAST'],
       '20' : ['TWENTY', 'PAST'],
@@ -154,6 +154,7 @@
     function lightItUp(arr){
       for(let i = 0 ; i < arr.length ; i++){
         let word = document.querySelector(`.word[data-word='${arr[i]}']`)
+        
         word.classList.add('lit');
       }
     }
